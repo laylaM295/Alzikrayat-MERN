@@ -52,4 +52,4 @@ How to Run:
 
 Student Name:
 Layla mohammed elamin
-ليلى محمد لامين
+ليلى محمد الامين
