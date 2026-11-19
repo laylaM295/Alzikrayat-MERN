@@ -1,0 +1,365 @@
+/* General Layout */
+
+main {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px 5%;
+}
+
+button,
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 7px;
+  padding: 11px 18px;
+  font-size: 15px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #6c63ff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5148dc;
+}
+
+.btn-secondary {
+  background: #e9e9f1;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d8d8e5;
+}
+
+/* Hero Section */
+
+.hero {
+  background: linear-gradient(135deg, #6c63ff, #9b59b6);
+  color: white;
+  text-align: center;
+  padding: 65px 25px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  color: white;
+  font-size: 42px;
+}
+
+.hero p {
+  margin-bottom: 25px;
+  line-height: 1.7;
+}
+
+.hero h3 {
+  margin-bottom: 20px;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin: 5px;
+}
+
+/* Gallery */
+
+.home-gallery,
+.profile-gallery {
+  margin-top: 35px;
+}
+
+.home-gallery h2,
+.profile-gallery h2 {
+  margin-bottom: 25px;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+/* Photo Card */
+
+.photo-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: left;
+}
+
+.photo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.photo-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.photo-card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-image-placeholder {
+  height: 220px;
+  display: grid;
+  place-items: center;
+  background: #eeeef5;
+  color: #777;
+}
+
+.photo-card-content {
+  padding: 15px;
+}
+
+.photo-card-content h3 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.photo-card-content p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.photo-card-footer {
+  padding: 12px 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: #666;
+  font-size: 13px;
+}
+
+/* Profile */
+
+.profile-header {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  text-align: center;
+}
+
+.profile-header h2 {
+  margin: 15px 0;
+}
+
+.profile-header p {
+  margin: 10px 0;
+}
+
+.profile-header .btn,
+.profile-header button {
+  display: inline-block;
+  margin: 10px 5px;
+}
+
+/* Upload Form */
+
+.upload-page {
+  max-width: 650px;
+  margin: 30px auto;
+}
+
+.upload-form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+.upload-form div {
+  margin-bottom: 20px;
+}
+
+.upload-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.upload-form input,
+.upload-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font: inherit;
+}
+
+.upload-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.upload-form button {
+  margin: 8px 5px 0 0;
+}
+
+/* Photo Details */
+
+.photo-details {
+  max-width: 850px;
+  margin: auto;
+}
+
+.photo-details-card {
+  margin: 25px 0;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.photo-details-image {
+  width: 100%;
+  max-height: 550px;
+  object-fit: contain;
+  background: #f5f5f5;
+  display: block;
+}
+
+.photo-details-content {
+  padding: 25px;
+  text-align: left;
+}
+
+.photo-details-content h1 {
+  font-size: 30px;
+}
+
+.photo-details-content p {
+  margin: 12px 0;
+  line-height: 1.7;
+}
+
+/* Comments */
+
+.comments-section {
+  margin: 35px 0;
+  text-align: left;
+}
+
+.comments-section h2 {
+  margin-bottom: 20px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font: inherit;
+}
+
+.comment-form button {
+  align-self: flex-start;
+  background: #6c63ff;
+  color: white;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.comment-card {
+  background: white;
+  padding: 18px;
+  border: 1px solid #eee;
+  border-radius: 9px;
+}
+
+.comment-card h4 {
+  margin: 0 0 10px;
+}
+
+.comment-card p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.comment-card small {
+  color: #888;
+}
+
+/* Delete Buttons */
+
+.delete-photo-btn,
+.delete-comment-btn {
+  background: #dc3545;
+  color: white;
+  padding: 7px 12px;
+}
+
+.delete-photo-btn:hover,
+.delete-comment-btn:hover {
+  background: #b02a37;
+}
+
+/* Errors */
+
+.error-message {
+  color: #dc3545;
+  margin: 12px 0;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  main {
+    padding: 20px 15px;
+  }
+
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .photos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-form {
+    padding: 20px;
+  }
+
+  .photo-details-content h1 {
+    font-size: 24px;
+  }
+}

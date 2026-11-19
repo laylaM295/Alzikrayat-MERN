@@ -1,0 +1,133 @@
+
+.upload-page {
+  width: 92%;
+  max-width: 680px;
+  margin: 45px auto;
+  min-height: 75vh;
+}
+
+.upload-page h1 {
+  text-align: center;
+  color: #0f172a;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 28px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 35px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(15, 23, 42, 0.07);
+}
+
+.upload-form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upload-form label {
+  color: #334155;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.upload-form input,
+.upload-form textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #f8fafc;
+  color: #1e293b;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.upload-form input:focus,
+.upload-form textarea:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.upload-form textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.upload-form input[type="file"] {
+  padding: 12px;
+  background: #eff6ff;
+  cursor: pointer;
+}
+
+.upload-form input[type="file"]::file-selector-button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 6px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.upload-form > p:not(.error-message) {
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.upload-form button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 9px;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.upload-form button:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.upload-form button[type="button"] {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.upload-form button[type="button"]:hover:not(:disabled) {
+  background: #cbd5e1;
+}
+
+.upload-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .upload-page {
+    margin: 25px auto;
+  }
+
+  .upload-page h1 {
+    font-size: 24px;
+  }
+
+  .upload-form {
+    padding: 22px;
+  }
+}
