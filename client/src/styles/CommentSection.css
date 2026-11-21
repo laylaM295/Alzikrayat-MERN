@@ -1,4 +1,3 @@
-
 .comments-section {
   margin-top: 30px;
   padding: 25px;
@@ -79,4 +78,42 @@
   .comments-section {
     padding: 17px;
   }
+}
+
+
+.comments-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.comments-heading h2 {
+  margin-bottom: 20px;
+}
+
+.realtime-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.realtime-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.realtime-status.connected {
+  color: #15803d;
+}
+
+.realtime-status.disconnected {
+  color: #b45309;
 }

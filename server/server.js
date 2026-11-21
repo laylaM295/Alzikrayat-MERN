@@ -8,10 +8,13 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const path = require("path");
+const http = require("http");
+const { Server } = require("socket.io");
 
 dotenv.config();
 
 const connectDB = require("./config/db");
+const { initializeSocket } = require("./config/socket");
 
 const authRoutes = require("./routes/authRoutes");
 const photoRoutes = require("./routes/photoRoutes");
@@ -27,34 +30,35 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // CORS Configuration
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Body Parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Session Configuration
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI,
-    }),
-    cookie: {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-  })
-);
+// Create one shared session middleware for Express and Socket.IO.
+const sessionMiddleware = session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+  }),
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 24 * 60 * 60 * 1000,
+  },
+});
+
+app.use(sessionMiddleware);
 
 // Static Uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -74,6 +78,22 @@ app.get("/", (req, res) => {
 // Error Handling Middleware
 app.use(errorMiddleware);
 
+// Create the HTTP server and attach Socket.IO to it.
+const httpServer = http.createServer(app);
+
+const io = new Server(httpServer, {
+  cors: corsOptions,
+});
+
+// Make the Socket.IO instance available to controllers through req.app.
+app.set("io", io);
+
+// Reuse the same Express session for Socket.IO handshakes.
+io.engine.use(sessionMiddleware);
+
+// Register Socket.IO events and photo rooms.
+initializeSocket(io);
+
 // Server Port
 const PORT = process.env.PORT || 5000;
 
@@ -86,9 +106,11 @@ const startServer = async () => {
 
     await connectDB();
 
-    app.listen(PORT, () => {
+    httpServer.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
+      console.log("Socket.IO is ready for real-time connections");
     });
+
   } catch (error) {
     console.error("Server startup failed:", error.message);
     process.exit(1);

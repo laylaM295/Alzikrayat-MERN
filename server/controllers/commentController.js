@@ -1,7 +1,7 @@
-
 const mongoose = require("mongoose");
 const Comment = require("../models/Comment");
 const Photo = require("../models/Photo");
+const { getPhotoRoomName } = require("../config/socket");
 
 exports.addComment = async (req, res) => {
   try {
@@ -42,10 +42,18 @@ exports.addComment = async (req, res) => {
 
     await newComment.populate("userId", "firstName lastName");
 
+    // Broadcast only after MongoDB has successfully saved the comment.
+    const io = req.app.get("io");
+
+    if (io) {
+      io.to(getPhotoRoomName(photoId)).emit("newComment", newComment);
+    }
+
     res.status(201).json({
       message: "Comment added successfully",
       comment: newComment,
     });
+
   } catch (error) {
     console.error("Add Comment Error:", error);
 
@@ -70,6 +78,7 @@ exports.getPhotoComments = async (req, res) => {
       .sort({ dateTime: -1 });
 
     res.json({ comments });
+
   } catch (error) {
     console.error("Get Photo Comments Error:", error);
 
@@ -112,11 +121,25 @@ exports.deleteComment = async (req, res) => {
       });
     }
 
+    const photoId = comment.photoId.toString();
+    const commentId = comment._id.toString();
+
     await comment.deleteOne();
+
+    // Keep other clients viewing this photo in sync after a deletion.
+    const io = req.app.get("io");
+
+    if (io) {
+      io.to(getPhotoRoomName(photoId)).emit("commentDeleted", {
+        commentId,
+        photoId,
+      });
+    }
 
     res.json({
       message: "Comment deleted successfully",
     });
+
   } catch (error) {
     console.error("Delete Comment Error:", error);
 
